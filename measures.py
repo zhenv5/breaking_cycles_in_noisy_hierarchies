@@ -14,10 +14,10 @@ def measure_pairs_agreement(pairs,nodes_score):
 	acc = 0
 	if total_pairs != 0:
 		acc = num_correct_pairs * 1.0 / total_pairs
-		print("correct pairs: %d, wrong pairs: %d, total pairs: %d, accuracy: %0.4f" % (num_correct_pairs,num_wrong_pairs,total_pairs,num_correct_pairs*1.0/total_pairs))
+		#print("correct pairs: %d, wrong pairs: %d, total pairs: %d, accuracy: %0.4f" % (num_correct_pairs,num_wrong_pairs,total_pairs,num_correct_pairs*1.0/total_pairs))
 	else:
 		acc = 1
-		print("total pairs: 0, accuracy: 1")
+		#print("total pairs: 0, accuracy: 1")
 	return acc
 
 def F1(gt,predicted):
@@ -30,15 +30,15 @@ def F1(gt,predicted):
 	accurate_set = predicted_set & gt_set
 	non_recall_set = gt_set - predicted_set
 
-	print("gt size: %d, predicted size: %d" % (len(gt_set),len(predicted_set)))
-	print("accurate size: %d, non-recall size: %d" % (len(accurate_set),len(non_recall_set)))
+	#print("gt size: %d, predicted size: %d" % (len(gt_set),len(predicted_set)))
+	#print("accurate size: %d, non-recall size: %d" % (len(accurate_set),len(non_recall_set)))
 	
 	try:
 		accu = len(accurate_set)*1.0 / len(predicted_set)
 		recall = 1 - len(non_recall_set)*1.0/len(gt_set)
 		f1_score = 2.0*len(accurate_set)/(len(gt_set) + len(predicted_set))
 		F1_score = 2.0 * accu * recall / (accu + recall)
-		print("Accu: %0.4f, Recall: %0.4f, f1 score: %0.4f, F1 score: %0.4f" % (accu,recall,f1_score,F1_score))
+		#print("Accu: %0.4f, Recall: %0.4f, f1 score: %0.4f, F1 score: %0.4f" % (accu,recall,f1_score,F1_score))
 		return accu,recall,F1_score
 	except Exception as e:
 		print e
