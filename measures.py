@@ -29,10 +29,8 @@ def F1(gt,predicted):
 	predicted_set = set(predicted)
 	accurate_set = predicted_set & gt_set
 	non_recall_set = gt_set - predicted_set
-
 	#print("gt size: %d, predicted size: %d" % (len(gt_set),len(predicted_set)))
 	#print("accurate size: %d, non-recall size: %d" % (len(accurate_set),len(non_recall_set)))
-	
 	try:
 		accu = len(accurate_set)*1.0 / len(predicted_set)
 		recall = 1 - len(non_recall_set)*1.0/len(gt_set)
@@ -51,12 +49,13 @@ def evaluation(gt_file,predicted_file):
 
 def report_performance(gt_file,predicted_edges,note):
 	#print("edges to be removed: %s" % predicted_edges)
+	print("**********************")
 	print("method: %s, # edges to be removed: %d" % (note,len(predicted_edges)))	
 	if gt_file != None:
 		gt_edges = read_pairs_from_file(gt_file)
 		accu,recall,F1_score =  F1(gt_edges,predicted_edges)
-		print("method: %s, accu: %0.4f, recall: %0.4f, f1: %0.4f" % (note,accu,recall,F1_score))
-
+		print("method: %s, precision: %0.4f, recall: %0.4f, f1: %0.4f" % (note,accu,recall,F1_score))
+	print("**********************")
 
 import argparse
 if __name__ == "__main__":

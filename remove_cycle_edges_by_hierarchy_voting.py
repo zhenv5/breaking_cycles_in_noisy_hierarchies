@@ -38,18 +38,4 @@ def remove_cycle_edges_heuristic(graph_file,edges_score):
 	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = int)
 	edges_to_be_removed = scc_based_to_remove_cycle_edges_iterately(g,edges_score)
 	edges_to_be_removed = list(set(edges_to_be_removed))
-	
-	#analysis_graph(g)
-	#g.remove_edges_from(edges_to_be_removed)
-	edges_to_be_removed_file = graph_file[:len(graph_file)-6] + "_removed_by_hierarchy_voting.edges"
-	write_pairs_to_file(edges_to_be_removed,edges_to_be_removed_file)
-
-	#print("after removal of cycle edges: %d" % len(edges_to_be_removed))
-	#analysis_graph(g)
-	#import random 
-	#index = random.randint(0, len(edges_to_be_removed)-1)
-	#g.add_edges_from([edges_to_be_removed[index]])
-	#print("analysis of graph after adding an edge back")
-	#analysis_graph(g)
-	#g.remove_edges_from([edges_to_be_removed[index]])
 	return edges_to_be_removed

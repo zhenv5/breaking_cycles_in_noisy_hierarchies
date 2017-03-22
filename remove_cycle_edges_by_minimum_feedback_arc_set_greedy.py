@@ -68,6 +68,10 @@ def remove_cycle_edges_by_mfas(graph_file):
 	write_pairs_to_file(edges_to_be_removed,edges_to_be_removed_file)
 	return edges_to_be_removed
 
+def mfas_performance(graph_file,gt_edges_file):
+	edges_to_be_removed = remove_cycle_edges_by_mfas(graph_file)
+	from measures import report_performance
+	report_performance(gt_edges_file,edges_to_be_removed,"mfas")		
 
 import argparse
 if __name__ == "__main__":
@@ -77,6 +81,5 @@ if __name__ == "__main__":
 	args = parser.parse_args()
 	graph_file = args.graph_file
 	gt_file = args.gt_edges_file
-	edges_to_be_removed = remove_cycle_edges_by_mfas(graph_file)
-	from measures import report_performance
-	report_performance(gt_file,edges_to_be_removed,"mfas")	
+	mfas_performance(graph_file,gt_file)
+	

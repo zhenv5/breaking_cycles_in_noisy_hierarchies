@@ -70,7 +70,7 @@ def computing_hierarchy(graph_file,players_score_func_name):
 			write_dict_to_file(players,output_file)
 		return players
 
-def breaking_cycles_by_hierarchy(graph_file,gt_file,players_score_name):
+def breaking_cycles_by_hierarchy_performance(graph_file,gt_file,players_score_name):
 	
 	from measures import report_performance
 	if players_score_name != "ensembling":
@@ -122,5 +122,5 @@ if __name__ == "__main__":
 	players_score_name = args.score_name
 	gt_file = args.gt_edges_file
 
-	breaking_cycles_by_hierarchy(graph_file,gt_file,players_score_name)
+	breaking_cycles_by_hierarchy_performance(graph_file,gt_file,players_score_name)
 	

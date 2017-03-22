@@ -49,6 +49,11 @@ def dfs_remove_back_edges(graph_file):
 	write_pairs_to_file(edges_to_be_removed,edges_to_be_removed_file)
 	return edges_to_be_removed
 
+def dfs_performance(graph_file,gt_edges_file):
+	edges_to_be_removed = dfs_remove_back_edges(graph_file)
+	from measures import report_performance
+	report_performance(gt_edges_file,edges_to_be_removed,"dfs")
+
 
 if __name__ == "__main__":
 
@@ -62,10 +67,5 @@ if __name__ == "__main__":
 	args = parser.parse_args()
 	graph_file = args.graph_file
 	
-	print("graph_file %s " % graph_file)
-	#from network_functions import analysis_graph
-	edges_to_be_removed = dfs_remove_back_edges(graph_file)
-
-
-	from measures import report_performance
-	report_performance(args.gt_edges_file,edges_to_be_removed,"dfs")
+	print("graph_file %s " % graph_file)	
+	dfs_performance(graph_file,args.gt_edges_file)

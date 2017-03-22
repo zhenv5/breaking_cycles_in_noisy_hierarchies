@@ -65,17 +65,17 @@ def introduce_cycles(g,num_extra_edges,path_length):
 		return add_cycle_edges(g,num_extra_edges,path_length)
 
 def introduce_cycles_2_DAG(graph_file,num_extra_edges,path_length):
-	
-	if l <= 0:
+
+	if path_length <= 0:
 		print("no constraints on path length")
 	else:
-		print("path length: %d" % l)
+		print("path length: %d" % path_length)
 
 	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = int)
 	extra_edges = introduce_cycles(g,num_extra_edges,path_length = path_length)
 
-	extra_edges_file = graph_file[:len(graph_file)-6] + "_extra_" + str(num_extra_edges) + "_path_len_" + str(l) + ".edges"
-	graph_with_extra_edges_file = graph_file[:len(graph_file)-6] + "_graph_w_extra_" + str(num_extra_edges) + "_path_len_" + str(l) + ".edges"
+	extra_edges_file = graph_file[:len(graph_file)-6] + "_extra_" + str(num_extra_edges) + "_path_len_" + str(path_length) + ".edges"
+	graph_with_extra_edges_file = graph_file[:len(graph_file)-6] + "_graph_w_extra_" + str(num_extra_edges) + "_path_len_" + str(path_length) + ".edges"
 
 	print("extra edges saved in: %s" % extra_edges_file)
 	print("graph with extra edges saved in: %s" % graph_with_extra_edges_file)
@@ -84,6 +84,7 @@ def introduce_cycles_2_DAG(graph_file,num_extra_edges,path_length):
 	write_pairs_to_file(extra_edges,extra_edges_file)
 	write_pairs_to_file(extra_edges + g.edges(),graph_with_extra_edges_file)	
 
+	return (extra_edges_file,graph_with_extra_edges_file)
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-g","--graph_file",default= " ", help = "input graph file name (edges list) DAG")
@@ -97,6 +98,5 @@ if __name__ == "__main__":
 
 	print("graph_file %s " % graph_file)
 	print("# extra edges: %d" % k)
-
 	introduce_cycles_2_DAG(graph_file,k,l)
 
