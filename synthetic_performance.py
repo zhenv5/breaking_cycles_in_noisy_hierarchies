@@ -14,7 +14,7 @@ def evaluation(graph_file,gt_edges_file,method):
 		from remove_cycle_edges_by_hierarchy import breaking_cycles_by_hierarchy_performance
 		breaking_cycles_by_hierarchy_performance(graph_file,gt_edges_file,method)
 	
-def performance(graph_file,extra_edges_file):
+def break_cycles(graph_file,extra_edges_file = None):
 	methods = ["dfs","pagerank","mfas","ensembling"]
 	for method in methods:
 		evaluation(graph_file,extra_edges_file,method)
@@ -31,8 +31,8 @@ if __name__ == "__main__":
 	args = parser.parse_args()
 	
 
-	m = args.num_nodes 
-	n = args.num_edges 
+	n = args.num_nodes 
+	m = args.num_edges 
 	k = args.num_extra_edges
 	l = args.path_length
 
@@ -47,6 +47,6 @@ if __name__ == "__main__":
 	from introduce_cycles_to_DAG import introduce_cycles_2_DAG
 	extra_edges_file,graph_with_extra_edges_file = introduce_cycles_2_DAG(graph_file,k,l)
 
-	performance(graph_with_extra_edges_file,extra_edges_file)
+	break_cycles(graph_with_extra_edges_file,extra_edges_file)
 
 
