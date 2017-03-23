@@ -35,9 +35,12 @@ if __name__ == "__main__":
 	m = args.num_edges 
 	k = args.num_extra_edges
 	l = args.path_length
+	
+	if not os.path.exists(args.dir):
+		os.makedirs(args.dir)
 
 	graph_file = args.dir + "gnm_" + str(n) + "_" + str(m)+".edges"
-
+	
 	if not os.path.isfile(graph_file):
 		from generate_random_dag import gnm_random_graph
 		g = gnm_random_graph(n,m)
