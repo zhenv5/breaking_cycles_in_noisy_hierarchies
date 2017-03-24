@@ -52,7 +52,7 @@ def dfs_remove_back_edges(graph_file):
 def dfs_performance(graph_file,gt_edges_file):
 	edges_to_be_removed = dfs_remove_back_edges(graph_file)
 	from measures import report_performance
-	report_performance(gt_edges_file,edges_to_be_removed,"dfs")
+	report_performance(gt_edges_file,edges_to_be_removed,"DFS")
 
 
 if __name__ == "__main__":

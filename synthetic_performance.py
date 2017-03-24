@@ -2,22 +2,6 @@ import networkx as nx
 import argparse
 import os.path
 
-def evaluation(graph_file,gt_edges_file,method):
-	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = int)
-	if method == "dfs":
-		from remove_cycle_edges_by_dfs import dfs_performance
-		edges_to_be_removed = dfs_performance(graph_file,gt_edges_file)
-	elif method == "mfas":
-		from remove_cycle_edges_by_minimum_feedback_arc_set_greedy import mfas_performance
-		mfas_performance(graph_file,gt_edges_file)
-	elif method == "pagerank" or method == "ensembling" or method == "trueskill" or method == "socialagony":
-		from remove_cycle_edges_by_hierarchy import breaking_cycles_by_hierarchy_performance
-		breaking_cycles_by_hierarchy_performance(graph_file,gt_edges_file,method)
-	
-def break_cycles(graph_file,extra_edges_file = None):
-	methods = ["dfs","pagerank","mfas","ensembling"]
-	for method in methods:
-		evaluation(graph_file,extra_edges_file,method)
 
 if __name__ == "__main__":
 
@@ -41,15 +25,18 @@ if __name__ == "__main__":
 
 	graph_file = args.dir + "gnm_" + str(n) + "_" + str(m)+".edges"
 	
-	if not os.path.isfile(graph_file):
-		from generate_random_dag import gnm_random_graph
-		g = gnm_random_graph(n,m)
-		from file_io import write_pairs_to_file
-		write_pairs_to_file(g.edges(),graph_file)
+	# generate random DAG
+	from generate_random_dag import gnm_random_graph
+	g = gnm_random_graph(n,m)
+	from file_io import write_pairs_to_file
+	write_pairs_to_file(g.edges(),graph_file)
 
+	# introduce cycles to this DAG
 	from introduce_cycles_to_DAG import introduce_cycles_2_DAG
 	extra_edges_file,graph_with_extra_edges_file = introduce_cycles_2_DAG(graph_file,k,l)
 
+	# remove cycle edges
+	from break_cycles import break_cycles
 	break_cycles(graph_with_extra_edges_file,extra_edges_file)
 
 

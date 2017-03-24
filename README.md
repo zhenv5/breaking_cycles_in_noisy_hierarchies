@@ -139,9 +139,9 @@ python remove_cycle_edges_by_hierarchy.py -g data/gnm_300_2500_graph_w_extra_300
 * **This can also report performances of TS_G, TS_B, TS_F, SA_G, SA_B and SA_F individually**, these performance may have slightly difference with running them individually. 
 * It can report performance of H_Voting (ensembling of SA_G, SA_B, SA_F, TS_G, TS_B and TS_F)
 
-#### Put them together
+#### Test on Synthetic Graphs
 
-Instead of testing above methods individually, you can simply run below code to compare performance of all methods.
+Instead of testing above methods individually, you can simply run below code to compare performance of all methods on Synthetic Graphs (random generated graphs).
 
 ```
 python synthetic_performance.py --dir data/ -m 350 -n 5000 -k 500 -l 0
@@ -149,10 +149,16 @@ python synthetic_performance.py --dir data/ -m 350 -n 5000 -k 500 -l 0
 ```
 
 * --dir: directory to save all results, 'data/' is in current directory
-* -m: number of nodes in the generated random graph
-* -n: number of edges in the generated random graph 
+* -n: number of nodes in the generated random graph
+* -m: number of edges in the generated random graph 
 * -k: number of extra edges to introduce cycles to the generated random graph 
 * -l: control parameter of path length
+
+It will do: 
+
+* generate a random DAG with n nodes and m edges
+* introduce k extra edges to this DAG to make it have cycles (l is used to control generated cycle size, if l == 0, it has no constraints on cycle size)
+* run all methods to break cycles and report performance
 
 It will output such as:
 
@@ -220,3 +226,22 @@ method: ensembling SocialAgony and TrueSkill (H_Voting:[SA_G,SA_B,SA_F,TS_G,TS_F
 method: ensembling SocialAgony and TrueSkill (H_Voting:[SA_G,SA_B,SA_F,TS_G,TS_F,TS_B]), precision: 0.8230, recall: 0.9300, f1: 0.8732
 **********************
 ```
+
+#### Test on Real Datasets
+
+If you already have a graph with cycles, you can run:
+
+```
+python break_cycles.py -g data/test/gnm_300_1500_graph_w_extra_200_path_len_0.edges
+```
+
+* -g data/test/gnm_300_1500_graph_w_extra_200_path_len_0.edges : to specify edgeslist file
+
+And if you have ground truth, you can run below commands to report performances:
+
+
+```
+python break_cycles.py -g data/test/gnm_300_1500_graph_w_extra_200_path_len_0.edges -t data/test/gnm_300_1500_extra_200_path_len_0.edges 
+```
+
+* -t data/test/gnm_300_1500_extra_200_path_len_0.edges   : to specify ground truth of edges to be removed

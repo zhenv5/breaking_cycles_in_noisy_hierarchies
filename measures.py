@@ -50,11 +50,15 @@ def evaluation(gt_file,predicted_file):
 def report_performance(gt_file,predicted_edges,note):
 	#print("edges to be removed: %s" % predicted_edges)
 	print("**********************")
-	print("method: %s, # edges to be removed: %d" % (note,len(predicted_edges)))	
+	
 	if gt_file != None:
 		gt_edges = read_pairs_from_file(gt_file)
 		accu,recall,F1_score =  F1(gt_edges,predicted_edges)
-		print("method: %s, precision: %0.4f, recall: %0.4f, f1: %0.4f" % (note,accu,recall,F1_score))
+		print("method------precision---recall------F1---numEdgesRemoved")
+		print("%s 	%0.4f 	%0.4f 	%0.4f 	%d" % (note,accu,recall,F1_score,len(predicted_edges)))
+		#print("method: %s, precision: %0.4f, recall: %0.4f, f1: %0.4f" % (note,accu,recall,F1_score))
+	else:
+		print("method: %s, # edges to be removed: %d" % (note,len(predicted_edges)))	
 	print("**********************")
 
 import argparse
