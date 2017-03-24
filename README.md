@@ -1,5 +1,9 @@
 #### Remove Cycle Edges  - Description
 
+* created by: Jiankai Sun
+* last update: 21 March, 2017
+* Email: sun.1306@osu.edu
+
 ##### Requirements
 
 * Python 2.7
