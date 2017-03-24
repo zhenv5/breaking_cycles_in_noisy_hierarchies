@@ -144,8 +144,7 @@ python remove_cycle_edges_by_hierarchy.py -g data/gnm_300_2500_graph_w_extra_300
 Instead of testing above methods individually, you can simply run below code to compare performance of all methods on Synthetic Graphs (random generated graphs).
 
 ```
-python synthetic_performance.py --dir data/ -m 350 -n 5000 -k 500 -l 0
-
+python synthetic_performance.py --dir data/ -n 300 -n 2500 -k 300 -l 0
 ```
 
 * --dir: directory to save all results, 'data/' is in current directory
@@ -160,88 +159,46 @@ It will do:
 * introduce k extra edges to this DAG to make it have cycles (l is used to control generated cycle size, if l == 0, it has no constraints on cycle size)
 * run all methods to break cycles and report performance
 
-It will output such as:
-
-
-```
-**********************
-**********************
-method: dfs, # edges to be removed: 2938
-method: dfs, precision: 0.0514, recall: 0.3020, f1: 0.0878
-**********************
-**********************
-method: pagerank Hiearchy_Greedy (H_G), # edges to be removed: 1153
-method: pagerank Hiearchy_Greedy (H_G), precision: 0.3452, recall: 0.7960, f1: 0.4815
-**********************
-**********************
-method: pagerank Hiearchy_Forward(H_F), # edges to be removed: 1283
-method: pagerank Hiearchy_Forward(H_F), precision: 0.3188, recall: 0.8180, f1: 0.4588
-**********************
-**********************
-method: pagerank Hiearchy_Backward (H_B), # edges to be removed: 1386
-method: pagerank Hiearchy_Backward (H_B), precision: 0.2929, recall: 0.8120, f1: 0.4305
-**********************
-**********************
-method: pagerank Hiearchy_Voting (H_Voting), # edges to be removed: 1079
-method: pagerank Hiearchy_Voting (H_Voting), precision: 0.3624, recall: 0.7820, f1: 0.4953
-**********************
-**********************
-method: mfas, # edges to be removed: 774
-method: mfas, precision: 0.6008, recall: 0.9300, f1: 0.7300
-**********************
-**********************
-method:  SocialAgony, SA_G, # edges to be removed: 602
-method:  SocialAgony, SA_G, precision: 0.7608, recall: 0.9160, f1: 0.8312
-**********************
-**********************
-method:  SocialAgony, SA_F, # edges to be removed: 837
-method:  SocialAgony, SA_F, precision: 0.5556, recall: 0.9300, f1: 0.6956
-**********************
-**********************
-method:  SocialAgony, SA_B, # edges to be removed: 814
-method:  SocialAgony, SA_B, precision: 0.5627, recall: 0.9160, f1: 0.6971
-**********************
-**********************
-method:  SocialAgony, SA_Voting:([SA_G,SA_B,SA_F]), # edges to be removed: 594
-method:  SocialAgony, SA_Voting:([SA_G,SA_B,SA_F]), precision: 0.7727, recall: 0.9180, f1: 0.8391
-**********************
-**********************
-method:  TrueSkill,  TS_G, # edges to be removed: 587
-method:  TrueSkill,  TS_G, precision: 0.7819, recall: 0.9180, f1: 0.8445
-**********************
-**********************
-method:  TrueSkill, TS_F, # edges to be removed: 735
-method:  TrueSkill, TS_F, precision: 0.6463, recall: 0.9500, f1: 0.7692
-**********************
-**********************
-method:  TrueSkill, TS_B, # edges to be removed: 750
-method:  TrueSkill, TS_B, precision: 0.6293, recall: 0.9440, f1: 0.7552
-**********************
-**********************
-method:  TrueSkill, TS_Voting:([TS_G,TS_F,TS_B]), # edges to be removed: 579
-method:  TrueSkill, TS_Voting:([TS_G,TS_F,TS_B]), precision: 0.8031, recall: 0.9300, f1: 0.8619
-**********************
-**********************
-method: ensembling SocialAgony and TrueSkill (H_Voting:[SA_G,SA_B,SA_F,TS_G,TS_F,TS_B]), # edges to be removed: 565
-method: ensembling SocialAgony and TrueSkill (H_Voting:[SA_G,SA_B,SA_F,TS_G,TS_F,TS_B]), precision: 0.8230, recall: 0.9300, f1: 0.8732
-**********************
-```
 
 #### Test on Real Datasets
 
 If you already have a graph with cycles, you can run:
 
 ```
-python break_cycles.py -g data/test/gnm_300_1500_graph_w_extra_200_path_len_0.edges
+python break_cycles.py -g data/test/gnm_300_2500_graph_w_extra_300_path_len_0.edges
 ```
 
-* -g data/test/gnm_300_1500_graph_w_extra_200_path_len_0.edges : to specify edgeslist file
+* -g data/test/gnm_300_2500_graph_w_extra_300_path_len_0.edges : to specify edgeslist file
 
 And if you have ground truth, you can run below commands to report performances:
 
 
 ```
-python break_cycles.py -g data/test/gnm_300_1500_graph_w_extra_200_path_len_0.edges -t data/test/gnm_300_1500_extra_200_path_len_0.edges 
+python break_cycles.py -g data/test/gnm_300_2500_graph_w_extra_300_path_len_0.edges -t data/test/gnm_300_2500_extra_300_path_len_0.edges 
 ```
 
-* -t data/test/gnm_300_1500_extra_200_path_len_0.edges   : to specify ground truth of edges to be removed
+* -t data/test/gnm_300_2500_extra_300_path_len_0.edges : to specify ground truth of edges to be removed
+
+
+#### Visualization 
+
+Visualize peroformance of different methods.
+
+```
+python plot_recallPrecision.py --input data/performance.txt --title "RG(1.5K,15K)"
+```
+
+* --input data/performance.txt 
+
+file format:
+
+method_name  precision recall f-1Score(optional) numEdgesRemoved(optional) 
+
+**(columns are separated by whitespace)**
+
+first **3** columns must be: method_name, precision, and recall. 
+
+left columns are optional, such as f-1score and numEdgesRemoved.
+
+
+* --title "RG(1.5K,15K)": file will be saved at: performance_RG(1.5K,15K).pdf 

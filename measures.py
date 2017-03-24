@@ -49,7 +49,7 @@ def evaluation(gt_file,predicted_file):
 
 def report_performance(gt_file,predicted_edges,note):
 	#print("edges to be removed: %s" % predicted_edges)
-	print("**********************")
+	#print("**********************")
 	
 	if gt_file != None:
 		gt_edges = read_pairs_from_file(gt_file)
@@ -59,7 +59,7 @@ def report_performance(gt_file,predicted_edges,note):
 		#print("method: %s, precision: %0.4f, recall: %0.4f, f1: %0.4f" % (note,accu,recall,F1_score))
 	else:
 		print("method: %s, # edges to be removed: %d" % (note,len(predicted_edges)))	
-	print("**********************")
+	#print("**********************")
 
 import argparse
 if __name__ == "__main__":
