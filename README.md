@@ -165,19 +165,19 @@ It will do:
 If you already have a graph with cycles, you can run:
 
 ```
-python break_cycles.py -g data/test/gnm_300_2500_graph_w_extra_300_path_len_0.edges
+python break_cycles.py -g data/gnm_300_2500_graph_w_extra_300_path_len_0.edges
 ```
 
-* -g data/test/gnm_300_2500_graph_w_extra_300_path_len_0.edges : to specify edgeslist file
+* -g data/gnm_300_2500_graph_w_extra_300_path_len_0.edges : to specify edgeslist file
 
 And if you have ground truth, you can run below commands to report performances:
 
 
 ```
-python break_cycles.py -g data/test/gnm_300_2500_graph_w_extra_300_path_len_0.edges -t data/test/gnm_300_2500_extra_300_path_len_0.edges 
+python break_cycles.py -g data/gnm_300_2500_graph_w_extra_300_path_len_0.edges -t data/gnm_300_2500_extra_300_path_len_0.edges 
 ```
 
-* -t data/test/gnm_300_2500_extra_300_path_len_0.edges : to specify ground truth of edges to be removed
+* -t data/gnm_300_2500_extra_300_path_len_0.edges : to specify ground truth of edges to be removed
 
 
 #### Visualization 
