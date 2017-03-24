@@ -202,3 +202,29 @@ Other columns are optional, such as f-1score and numEdgesRemoved in data/perform
 
 
 * --title "RG(1.5K,15K)": file will be saved at: performance_RG(1.5K,15K).pdf
+
+For example, we test algorithms on a random graph (1500,15000) with 500 extra edges added, and get performance saved as:
+
+
+```
+DFS 	0.0140 	0.1820 	0.0259 	6516
+PR 	0.2298 	0.7400 	0.3507 	1610
+MFAS 	0.4464 	0.9320 	0.6036 	1044
+SA_G 	0.8993 	0.9640 	0.9305 	536
+SA_F 	0.5946 	0.9620 	0.7349 	809
+SA_B 	0.5975 	0.9680 	0.7389 	810
+SA_Voting 	0.9282 	0.9560 	0.9419 	515
+TS_G 	0.8274 	0.9300 	0.8757 	562
+TS_F 	0.5145 	0.9580 	0.6695 	931
+TS_B 	0.5010 	0.9700 	0.6608 	968
+TS_Voting 	0.8654 	0.9260 	0.8947 	535
+H_Voting 	0.9369 	0.9500 	0.9434 	507
+```
+
+* first column, such as DFS: method name
+* second column, such as 0.0140: precision
+* third column, such as 0.1820: recall
+* forth column, such as 0.0259: f-1 score (optional, will compute f-1 automatically)
+* fifth column, such as 1044: number of edges to be removed
+
+visualization will be saved as: performance_RG(1.5K,15K).pdf
