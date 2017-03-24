@@ -4,7 +4,7 @@
 
 * Python 2.7
 * Lib: networkx
-* Lib: TrueSkill
+* Lib: TrueSkill [install](http://trueskill.org/)
 
 #### Generate Random Graphs (DAGs)
 
@@ -100,7 +100,7 @@ It will report performance of TS_G, TS_B, TS_F, and TS_Voting (ensembling of TS_
 
 Social Agony code is from [Tatti](http://users.ics.aalto.fi/ntatti/software.shtml)
 
-The source code has been put in /agony. You have to compile it first. 
+The source code has been put in /agony. You have to compile it first. To compile it sucessfully, you may have to install some packages. Detailes can be viewed at /agony/README.md
 
 After that run:
 
@@ -196,9 +196,9 @@ method_name  precision recall f-1Score(optional) numEdgesRemoved(optional)
 
 **(columns are separated by whitespace)**
 
-first **3** columns must be: method_name, precision, and recall. 
+First **3** columns must be: method_name, precision, and recall. 
 
-left columns are optional, such as f-1score and numEdgesRemoved.
+Other columns are optional, such as f-1score and numEdgesRemoved in data/performance.txt.
 
 
-* --title "RG(1.5K,15K)": file will be saved at: performance_RG(1.5K,15K).pdf 
+* --title "RG(1.5K,15K)": file will be saved at: performance_RG(1.5K,15K).pdf
