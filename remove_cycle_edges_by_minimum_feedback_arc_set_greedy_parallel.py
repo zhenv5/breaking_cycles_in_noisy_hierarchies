@@ -30,7 +30,8 @@ def get_nodes_degree_dict(g,nodes):
 	return degree_dict
 
 
-def greedy_local_heuristic(sccs,degree_dict,edges_to_be_removed):
+def greedy_local_heuristic(sccs,degree_dict,queue):
+	edges_to_be_removed = []
 	while True:
 		graph = sccs.pop()
 		temp_nodes_degree_dict = {}
@@ -53,7 +54,8 @@ def greedy_local_heuristic(sccs,degree_dict,edges_to_be_removed):
 			for index,sub in enumerate(sub_graphs):
 				sccs.append(sub)
 		if not sccs:
-			return
+			break
+	queue.put(edges_to_be_removed)
 
 def remove_cycle_edges_by_mfas(graph_file):
 	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = int)
@@ -61,11 +63,21 @@ def remove_cycle_edges_by_mfas(graph_file):
 	degree_dict = get_nodes_degree_dict(g,scc_nodes)
 	sccs = get_big_sccs(g)
 	edges_to_be_removed = []
+	from multiprocessing import Process, Queue
 	import timeit
 	t1 = timeit.default_timer()
-	greedy_local_heuristic(sccs,degree_dict,edges_to_be_removed)
+	jobs = []
+	q = Queue()
+	for scc in sccs:
+		p = Process(target = greedy_local_heuristic, args = ([scc],degree_dict,q))
+		jobs.append(p)
+		p.start()
+	for p in jobs:
+		p.join()
+		edges_to_be_removed += list(q.get())
 	t2 = timeit.default_timer()
 	print("mfas time usage: %0.4f s" % (t2 - t1))
+	#greedy_local_heuristic(sccs,degree_dict,edges_to_be_removed)
 	edges_to_be_removed = list(set(edges_to_be_removed))
 	g.remove_edges_from(edges_to_be_removed)
 	edges_to_be_removed_file = graph_file[:len(graph_file)-6] + "_removed_by_mfas.edges"
