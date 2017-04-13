@@ -23,5 +23,5 @@ if __name__ == "__main__":
 	parser.add_argument("-g","--graph_file",default= " ", help = "input graph file name (edges list)")
 	args = parser.parse_args()
 	graph_file = args.graph_file
-	compute_social_agony(graph_file,is_local = False)
+	compute_social_agony(graph_file)
 	
