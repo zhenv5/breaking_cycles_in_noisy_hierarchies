@@ -1,4 +1,5 @@
 from file_io import read_pairs_from_file
+
 def measure_pairs_agreement(pairs,nodes_score):
 	# whether nodes in pairs agree with their ranking scores
 	num_correct_pairs = 0

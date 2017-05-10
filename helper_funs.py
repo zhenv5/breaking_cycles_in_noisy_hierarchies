@@ -10,6 +10,19 @@ def run_command(command,is_print = False):
 		print o[0]
 
 
+def normalize_dict(d,method = "min_max"):
+	values = d.values()
+	if method == "min_max":
+		min_v = min(values)
+		max_v = max(values)
+		return {key:(value - min_v)*1.0/(max_v - min_v) for key,value in d.iteritems()}
+	elif method == "z_score":
+		mean = np.mean(values)
+		std = np.std(values)
+		return {key:(value - mean)*1.0/(std) for key,value in d.iteritems()}
+
+
+
 def pick_from_dict(d, order = "max"):
 	min_k, min_v = 0, 10000
 

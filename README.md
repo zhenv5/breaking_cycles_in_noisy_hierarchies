@@ -37,7 +37,7 @@ output:
 #### Breaking Cycles by DFS
 
 ```
-python remove_cycle_edges_by_dfs.py -g gnm_300_2500_graph_w_extra_300_path_len_0.edges 
+python remove_cycle_edges_by_dfs.py -g data/gnm_300_2500_graph_w_extra_300_path_len_0.edges 
 ```
 
 You can specificity a edges list of file as ground truth (edges should be removed to break cycles)  by using '-t'. It will report precision, recall and F-1 score.
@@ -148,7 +148,7 @@ python remove_cycle_edges_by_hierarchy.py -g data/gnm_300_2500_graph_w_extra_300
 Instead of testing above methods individually, you can simply run below code to compare performance of all methods on Synthetic Graphs (random generated graphs).
 
 ```
-python synthetic_performance.py --dir data/ -n 300 -n 2500 -k 300 -l 0
+python synthetic_performance.py --dir data/ -n 300 -m 2500 -k 300 -l 0
 ```
 
 * --dir: directory to save all results, 'data/' is in current directory

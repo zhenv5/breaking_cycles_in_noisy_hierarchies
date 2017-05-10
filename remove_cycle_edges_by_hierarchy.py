@@ -42,9 +42,9 @@ def computing_hierarchy(graph_file,players_score_func_name):
 	import os.path
 	if players_score_func_name == "socialagony":
 		agony_file = graph_file[:len(graph_file)-6] + "_socialagony.txt"
-		from compute_social_agony import compute_social_agony
-		players = compute_social_agony(graph_file,agony_path = "agony/agony ")		
-		'''
+		#from compute_social_agony import compute_social_agony
+		#players = compute_social_agony(graph_file,agony_path = "agony/agony ")		
+		
 		if os.path.isfile(agony_file):
 			print("load pre-computed socialagony from: %s" % agony_file)
 			players = read_dict_from_file(agony_file)
@@ -53,7 +53,6 @@ def computing_hierarchy(graph_file,players_score_func_name):
 			from compute_social_agony import compute_social_agony
 			players = compute_social_agony(graph_file,agony_path = "agony/agony ")
 			print("write socialagony to file: %s" % agony_file)
-		'''
 		return players
 	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = int)
 	if players_score_func_name == "pagerank":
@@ -62,14 +61,18 @@ def computing_hierarchy(graph_file,players_score_func_name):
 		return players
 	elif players_score_func_name == "trueskill":
 		output_file = graph_file[:len(graph_file)-6] + "_trueskill.txt"
-		from true_skill import graphbased_trueskill
-		players = graphbased_trueskill(g)
-		from file_io import write_dict_to_file
-		write_dict_to_file(players,output_file)
-		'''
+		output_file_2 = graph_file[:len(graph_file)-6] + "_trueskill.pkl"
+		#from true_skill import graphbased_trueskill
+		#players = graphbased_trueskill(g)
+		#from file_io import write_dict_to_file
+		#write_dict_to_file(players,output_file)
+		
 		if os.path.isfile(output_file):
 			print("load pre-computed trueskill from: %s" % output_file)
 			players = read_dict_from_file(output_file,key_type = int, value_type = float)
+		elif os.path.isfile(output_file_2):
+			print("load pre-computed trueskill from: %s" % output_file_2)
+			players = read_from_pickle(output_file_2)			
 		else:
 			print("start computing trueskill...")
 			from true_skill import graphbased_trueskill
@@ -77,7 +80,7 @@ def computing_hierarchy(graph_file,players_score_func_name):
 			from file_io import write_dict_to_file
 			print("write trueskill to file: %s" % output_file)
 			write_dict_to_file(players,output_file)
-		'''
+		
 		return players
 
 def breaking_cycles_by_hierarchy_performance(graph_file,gt_file,players_score_name):

@@ -1,3 +1,14 @@
+import pickle
+def read_from_pickle(pickle_file):
+	try:
+		with open(pickle_file,"rb") as f:
+			print("File loaded from: %s" % pickle_file)
+			output = pickle.load(f)
+		return output
+	except Exception as e:
+		print("******Exception: %s" % e)
+		return {}
+
 def write_dict_to_file(data_dict,output_file):
 	tuple_list = [(k,v) for k,v in data_dict.iteritems()]
 	write_pairs_to_file(tuple_list,output_file)
@@ -8,9 +19,25 @@ def write_pairs_to_file(edges_list,edges_list_file):
 		u,v = e
 		f.write(str(u) + " " + str(v) + " \n")
 	f.close()
+	
 def write_edges_to_file(edges_list,edges_list_file):
 	write_pairs_to_file(edges_list,edges_list_file)
 
+def write_set_to_txt(output,output_file):
+	with open(output_file,"w") as f:
+		for k in output:
+			f.write(str(k) + "\n")
+
+def write_dict_to_txt(output,output_file):
+	with open(output_file,"w") as f:
+		for k,v in output.iteritems():
+			f.write(str(k) + " " + str(v) + " \n")
+
+
+def write_to_pickle(output_pickle,output_file):
+	with open(output_file,"wb") as f:
+		print("File saved to: %s" % output_file)
+		pickle.dump(output_pickle,f)
 
 def read_pairs_from_file(edges_list_file,first_type = int, second_type = int):
 	try:
@@ -54,3 +81,81 @@ def read_dict_from_file(file_name,key_type = int, value_type = int):
 			except Exception as e:
 				print e 
 	return d
+
+
+def read_dict_from_csv(file_name,key_type = int,value_type = int,key_index = 0, value_index = 1):
+	import pandas as pd
+	df = pd.read_csv(file_name,sep = ",")
+	d = {}
+	for k,v in zip(df.iloc[:,key_index],df.iloc[:,value_index]):
+		try:
+			k = key_type(k)
+			v = key_type(v)
+			d[k] = v
+		except Exception as e:
+			pass
+	return d
+
+def read_dict_list_from_csv(file_name,key_type = int, value_type = int, key_index = 0, value_index = 1):
+	import pandas as pd
+	df = pd.read_csv(file_name,sep = ",")
+	d = {}
+	for k,v in zip(df.iloc[:,key_index],df.iloc[:,value_index]):
+		k = key_type(k)
+		v = key_type(v)
+		if k in d:
+			d[k] = d[k] + [v]
+		else:
+			d[k] = [v]
+	return d
+
+
+
+def switch_key_value_dict_list(d):
+	new_d = {}
+	for k,v in d.iteritems():
+		if v in new_d:
+			new_d[v] += [k]
+		else:
+			new_d[v] = [k]
+	return new_d
+
+def switch_key_value_dict_value(d):
+	new_d = {}
+	for k,v in d.iteritems():
+		new_d[v] = k
+	return new_d
+
+
+
+def read_dict_pair_from_csv(file_name,key_type = int, value_type = int):
+	import pandas as pd
+	df = pd.read_csv(file_name,sep = ",")
+	d = {}
+	for k,v,days in zip(df.iloc[:,1],df.iloc[:,0],df.iloc[:,2]):
+		k = key_type(k)
+		v = value_type(v)
+		if k in d:
+			d[k].append((v,days))
+		else:
+			d[k] = [(v,days)]
+	for k,v in d.iteritems():
+		v = sorted(v,key = lambda x: x[1])
+		d[k] =v
+	return d 
+
+def read_dict_pair_from_csv_2(file_name,key_type = int, value_type = int):
+	import pandas as pd
+	df = pd.read_csv(file_name,delim_whitespace = True)
+	d = {}
+	for k,v,simi in zip(df.iloc[:,0],df.iloc[:,1],df.iloc[:,2]):
+		k = key_type(k)
+		v = value_type(v)
+		if k in d:
+			d[k] = d[k] + [(v,simi)]
+		else:
+			d[k] = [(v,simi)]
+	for k,v in d.iteritems():
+		v = sorted(v,key = lambda x: x[1],reverse = True)
+		d[k] =v
+	return d 
