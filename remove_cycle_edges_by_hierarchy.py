@@ -44,8 +44,8 @@ def computing_hierarchy(graph_file,players_score_func_name):
 		agony_file = graph_file[:len(graph_file)-6] + "_socialagony.txt"
 		#from compute_social_agony import compute_social_agony
 		#players = compute_social_agony(graph_file,agony_path = "agony/agony ")		
-		
-		if os.path.isfile(agony_file):
+		if False:
+		#if os.path.isfile(agony_file):
 			print("load pre-computed socialagony from: %s" % agony_file)
 			players = read_dict_from_file(agony_file)
 		else:
@@ -67,13 +67,15 @@ def computing_hierarchy(graph_file,players_score_func_name):
 		#from file_io import write_dict_to_file
 		#write_dict_to_file(players,output_file)
 		
+		'''
 		if os.path.isfile(output_file):
 			print("load pre-computed trueskill from: %s" % output_file)
 			players = read_dict_from_file(output_file,key_type = int, value_type = float)
 		elif os.path.isfile(output_file_2):
 			print("load pre-computed trueskill from: %s" % output_file_2)
 			players = read_from_pickle(output_file_2)			
-		else:
+		'''
+		if True:
 			print("start computing trueskill...")
 			from true_skill import graphbased_trueskill
 			players = graphbased_trueskill(g)
