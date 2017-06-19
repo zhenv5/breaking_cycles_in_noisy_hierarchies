@@ -1,8 +1,10 @@
-#### Remove Cycle Edges  - Description
+#### Breaking Cycles in Noisy Hierarchies  - Description
 
 * created by: Jiankai Sun
 * last update: 21 March, 2017
 * Email: sun.1306@osu.edu
+* 
+
 
 ##### Requirements
 
