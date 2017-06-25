@@ -1,21 +1,21 @@
-#### Breaking Cycles in Noisy Hierarchies  - Description
+### Breaking Cycles in Noisy Hierarchies  - Description
 
 > Taxonomy graphs that capture hyponymy or meronymy relationships through directed edges are expected to be acyclic. However, in practice, they may have thousands of cycles, as they are often created in a crowd-sourced way. Since these cycles represent logical fallacies, they need to be removed for many web applications. In this paper, we address the problem of breaking cycles while preserving the logical structure (hierarchy) of a directed graph as much as possible. Existing approaches for this problem either need manual intervention or use heuristics that can critically alter the taxonomy structure. In contrast, our approach infers graph hierarchy using a range of features, including a Bayesian skill rating system and a social agony metric. We also devise several strategies to leverage the inferred hierarchy for removing a small subset of edges to make the graph acyclic. Extensive experiments demonstrate the effectiveness of our approach.
 
 >  **Keywords**:  _Directed Acyclic Graph_, _Graph Hierarchy_, _TrueSkill_, _Social Agony_, _Cycle Edges_
 
 
-* last update: 5, June, 2017 
-* [Project Page](http://web.cse.ohio-state.edu/~sun.1306/Published_Works_Codes.html)
+* last update: 25, June, 2017 
+* [Author Homepage](http://web.cse.ohio-state.edu/~sun.1306)
 
 
-##### Requirements
+#### 0. Requirements
 
 * Python 2.7
 * Lib: networkx
 * Lib: TrueSkill [install](http://trueskill.org/)
 
-#### Generate Random Graphs (DAGs)
+#### 1. Generate Random Graphs (DAGs)
 
 ```
 python generate_random_dag.py -n 300 -m 2500 -g data/gnm_300_2500.edges
@@ -25,7 +25,7 @@ python generate_random_dag.py -n 300 -m 2500 -g data/gnm_300_2500.edges
 * m: number of edges 
 * g: file path used to save the generated random graph
 
-#### Introduce Cycles to DAG
+#### 2. Introduce Cycles to DAG
 
 ```
 python introduce_cycles_to_DAG.py -g data/gnm_300_2500.edges -k 300 -l 0
@@ -39,7 +39,7 @@ output:
 *  extra_edges_file (**Ground Truth Edges**): gnm_300_2500_extra_300_path_len_0.edges
 *  graph_with_extra_edges_file : gnm_300_2500_graph_w_extra_300_path_len_0.edges
 
-#### Breaking Cycles by DFS
+#### 3. Breaking Cycles by DFS
 
 ```
 python remove_cycle_edges_by_dfs.py -g data/gnm_300_2500_graph_w_extra_300_path_len_0.edges 
@@ -54,7 +54,7 @@ python remove_cycle_edges_by_dfs.py -g data/gnm_300_2500_graph_w_extra_300_path_
 Performance will be:
 
 
-#### Breaking Cycles by MFAS
+#### 4. Breaking Cycles by MFAS
 
 Local greedy implementation of Minimum feedback arc set problem.
 
@@ -68,7 +68,7 @@ You can specificity a edges list of file as ground truth (edges should be remove
 python remove_cycle_edges_by_minimum_feedback_arc_set_greedy.py -g data/gnm_300_2500_graph_w_extra_300_path_len_0.edges -t data/gnm_300_2500_extra_300_path_len_0.edges
 ```
 
-#### Breaking Cycles via Hierarchy, inferred by PageRank
+#### 5. Breaking Cycles via Hierarchy, inferred by PageRank
 
 Graph hierarchy is inferred from PageRank.
 
@@ -85,7 +85,7 @@ python remove_cycle_edges_by_hierarchy.py -s pagerank -g data/gnm_300_2500_graph
 ```
 
 
-#### Breaking Cycles via Hierarchy, inferred by TrueSkill
+#### 6. Breaking Cycles via Hierarchy, inferred by TrueSkill
 
 * Requirement: TrueSkill [install](http://trueskill.org/)
 
@@ -105,7 +105,7 @@ It will report performance of TS_G, TS_B, TS_F, and TS_Voting (ensembling of TS_
 
 
 
-#### Breaking Cycles via Hierarchy, inferred by SocialAgony
+#### 7. Breaking Cycles via Hierarchy, inferred by SocialAgony
 
 Social Agony code is from [Tatti](http://users.ics.aalto.fi/ntatti/software.shtml)
 
@@ -128,7 +128,7 @@ python remove_cycle_edges_by_hierarchy.py -g data/gnm_300_2500_graph_w_extra_300
 It will report performance of SA_G, SA_B, SA_F, and SA_Voting (ensembling of SA_G, SA_B and SA_F).
 
 
-#### Breaking Cycles via Hierarchy, Ensembling
+#### 8. Breaking Cycles via Hierarchy, Ensembling
 
 Ensembling TS_G, TS_B, TS_F, SA_G, SA_B and SA_F.
 
@@ -148,7 +148,7 @@ python remove_cycle_edges_by_hierarchy.py -g data/gnm_300_2500_graph_w_extra_300
 * **This can also report performances of TS_G, TS_B, TS_F, SA_G, SA_B and SA_F individually**, these performance may have slightly difference with running them individually. 
 * It can report performance of H_Voting (ensembling of SA_G, SA_B, SA_F, TS_G, TS_B and TS_F)
 
-#### Test on Synthetic Graphs
+#### 9. Test on Synthetic Graphs
 
 Instead of testing above methods individually, you can simply run below code to compare performance of all methods on Synthetic Graphs (random generated graphs).
 
@@ -169,7 +169,7 @@ It will do:
 * run all methods to break cycles and report performance
 
 
-#### Test on Real Datasets
+#### 10. Test on Real Datasets
 
 If you already have a graph with cycles, you can run:
 
@@ -189,7 +189,7 @@ python break_cycles.py -g data/gnm_300_2500_graph_w_extra_300_path_len_0.edges -
 * -t data/gnm_300_2500_extra_300_path_len_0.edges : to specify ground truth of edges to be removed
 
 
-#### Visualization 
+#### 11. Visualization 
 
 Visualize peroformance of different methods.
 
