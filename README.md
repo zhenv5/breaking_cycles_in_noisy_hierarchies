@@ -15,7 +15,6 @@
 
 * Python 2.7
 * Lib: networkx
-* Lib: TrueSkill [install](http://trueskill.org/)
 
 #### 1. Generate Random Graphs (DAGs)
 
@@ -89,7 +88,7 @@ python remove_cycle_edges_by_hierarchy.py -s pagerank -g data/gnm_300_2500_graph
 
 #### 6. Breaking Cycles via Hierarchy, inferred by TrueSkill
 
-* Requirement: TrueSkill [install](http://trueskill.org/)
+* External Library Requirement: TrueSkill [install](http://trueskill.org/)
 
 ```
 python remove_cycle_edges_by_hierarchy.py -g data/gnm_300_2500_graph_w_extra_300_path_len_0.edges -s trueskill
@@ -109,9 +108,10 @@ It will report performance of TS_G, TS_B, TS_F, and TS_Voting (ensembling of TS_
 
 #### 7. Breaking Cycles via Hierarchy, inferred by SocialAgony
 
-Social Agony code is from [Tatti](http://users.ics.aalto.fi/ntatti/software.shtml)
 
-The source code has been put in /agony. You have to compile it first. To compile it sucessfully, you may have to install some packages. Detailes can be viewed at ```/agony/README.md```.
+The code for computing Social Agony has been put in /agony. You have to compile it first. To compile it sucessfully, you may have to install some packages. Detailes can be viewed at ```/agony/README.md```.
+
+Social Agony computation code is from [Tatti](http://users.ics.aalto.fi/ntatti/software.shtml)
 
 After that run:
 
@@ -130,7 +130,7 @@ python remove_cycle_edges_by_hierarchy.py -g data/gnm_300_2500_graph_w_extra_300
 It will report performance of SA_G, SA_B, SA_F, and SA_Voting (ensembling of SA_G, SA_B and SA_F).
 
 
-#### 8. Breaking Cycles via Hierarchy, Ensembling
+#### 8. Breaking Cycles via Hierarchy, Ensembling Approach
 
 Ensembling TS_G, TS_B, TS_F, SA_G, SA_B and SA_F.
 
@@ -138,7 +138,7 @@ Ensembling TS_G, TS_B, TS_F, SA_G, SA_B and SA_F.
 python remove_cycle_edges_by_hierarchy.py -g data/gnm_300_2500_graph_w_extra_300_path_len_0.edges -s ensembling
 ```
 
-* -s ensembling: ensembling all 6 apprpaches
+* -s ensembling: ensembling all above 6 apprpaches
 
 You can also specify the ground truth file path as ground_truth_edges_file by using '-t'. 
 
