@@ -5,7 +5,9 @@
 >  **Keywords**:  _Directed Acyclic Graph_, _Graph Hierarchy_, _TrueSkill_, _Social Agony_, _Cycle Edges_
 
 
-* last update: 25, June, 2017 
+* Last update: 25, June, 2017 
+* Corresponding Paper: [Breaking Cycles in Noisy Hierarchies](https://github.com/zhenv5/breaking_cycles_in_noisy_hierarchies/tree/master/paper)
+* [The 9th International ACM Web Science Conference 2017](http://websci17.org/), WebSci'17
 * [Author Homepage](http://web.cse.ohio-state.edu/~sun.1306)
 
 
@@ -109,7 +111,7 @@ It will report performance of TS_G, TS_B, TS_F, and TS_Voting (ensembling of TS_
 
 Social Agony code is from [Tatti](http://users.ics.aalto.fi/ntatti/software.shtml)
 
-The source code has been put in /agony. You have to compile it first. To compile it sucessfully, you may have to install some packages. Detailes can be viewed at /agony/README.md
+The source code has been put in /agony. You have to compile it first. To compile it sucessfully, you may have to install some packages. Detailes can be viewed at ```/agony/README.md```.
 
 After that run:
 
