@@ -5,11 +5,11 @@
 >  **Keywords**:  _Directed Acyclic Graph_, _Graph Hierarchy_, _TrueSkill_, _Social Agony_, _Cycle Edges_
 
 
-* Last update: 25, June, 2017 
+* Last update: 14, July, 2017 
 * Corresponding Paper: [Breaking Cycles in Noisy Hierarchies](https://github.com/zhenv5/breaking_cycles_in_noisy_hierarchies/tree/master/paper)
-* [The 9th International ACM Web Science Conference 2017](http://websci17.org/), WebSci'17
+* [The 9th International ACM Web Science Conference 2017](http://dl.acm.org/citation.cfm?id=3091495), WebSci'17
+* If you use this code, please consider to cite this paper: [BibTex Download](http://web.cse.ohio-state.edu/~sun.1306/Published_Works/Bib_WebSci_17_Breaking_Cycles_in_Noisy_Hierarchies.bib)
 * [Author Homepage](http://web.cse.ohio-state.edu/~sun.1306)
-
 
 #### 0. Requirements
 
