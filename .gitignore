@@ -85,6 +85,6 @@ ENV/
 
 # Spyder project settings
 .spyderproject
-
+*.DS_Store
 # Rope project settings
 .ropeproject
