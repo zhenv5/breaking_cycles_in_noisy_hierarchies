@@ -1,10 +1,7 @@
 import networkx as nx
 
 def remove_self_loops_from_graph(g):
-	self_loops = []
-	for (u,v) in g.edges_iter():
-		if u == v:
-			self_loops.append((u,v))
+	self_loops = g.selfloop_edges()
 	g.remove_edges_from(self_loops)
 	return self_loops
 
