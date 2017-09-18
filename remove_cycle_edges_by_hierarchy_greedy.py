@@ -85,12 +85,14 @@ def scc_based_to_remove_cycle_edges_recursilvely(g,nodes_score):
 
 
 def scc_based_to_remove_cycle_edges_iterately(g,nodes_score):
+	from remove_self_loops import remove_self_loops_from_graph
+	self_loops = remove_self_loops_from_graph(g)
 	big_sccs = get_big_sccs(g)
 	scc_nodes_score_dict = scores_of_nodes_in_scc(big_sccs,nodes_score)
 	edges_to_be_removed = []
 	remove_cycle_edges_by_agony_iterately(big_sccs,scc_nodes_score_dict,edges_to_be_removed)
 	#print(" # edges to be removed: %d" % len(edges_to_be_removed))
-	return edges_to_be_removed
+	return edges_to_be_removed+self_loops
 
 def remove_cycle_edges(graph_file,players_score):
 	return remove_cycle_edges_by_agony(graph_file,players_score)

@@ -63,7 +63,9 @@ def scc_based_to_remove_cycle_edges_iterately(g,nodes_score,is_Forward):
 	return edges_to_be_removed
 
 def remove_cycle_edges_BF_iterately(g,players,is_Forward = True,score_name = "socialagony"):
+	from remove_self_loops import remove_self_loops_from_graph
+	self_loops = remove_self_loops_from_graph(g)
 	edges_to_be_removed = scc_based_to_remove_cycle_edges_iterately(g,players,is_Forward)
 	edges_to_be_removed = list(set(edges_to_be_removed))
-	return edges_to_be_removed
+	return edges_to_be_removed+self_loops
 

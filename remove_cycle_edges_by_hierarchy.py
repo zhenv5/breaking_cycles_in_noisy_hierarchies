@@ -17,6 +17,8 @@ def get_edges_voting_scores(set_edges_list):
 
 
 def remove_cycle_edges_strategies(graph_file,nodes_score_dict,score_name = "socialagony"):
+
+
 	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = int)
 	# greedy
 	e1 = scc_based_to_remove_cycle_edges_iterately(g,nodes_score_dict)
