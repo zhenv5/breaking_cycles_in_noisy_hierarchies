@@ -239,3 +239,28 @@ H_Voting 	0.9369 	0.9500 	0.9434 	507
 * fifth column, such as 1044: number of edges to be removed
 
 visualization will be saved as: performance_RG(1.5K,15K).pdf
+
+
+#### Cite
+
+If you use this code, please consider to cite this paper:
+
+```
+ @inproceedings{Sun:2017:BCN:3091478.3091495,
+ author = {Sun, Jiankai and Ajwani, Deepak and Nicholson, Patrick K. and Sala, Alessandra and Parthasarathy, Srinivasan},
+ title = {Breaking Cycles In Noisy Hierarchies},
+ booktitle = {Proceedings of the 2017 ACM on Web Science Conference},
+ series = {WebSci '17},
+ year = {2017},
+ isbn = {978-1-4503-4896-6},
+ location = {Troy, New York, USA},
+ pages = {151--160},
+ numpages = {10},
+ url = {http://doi.acm.org/10.1145/3091478.3091495},
+ doi = {10.1145/3091478.3091495},
+ acmid = {3091495},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {cycle edges, directed acyclic graph, graph hierarchy, social agony, trueskill},
+}
+```
