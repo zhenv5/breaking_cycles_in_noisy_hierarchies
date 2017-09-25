@@ -6,7 +6,7 @@ import os.path
 if __name__ == "__main__":
 
 	parser = argparse.ArgumentParser()
-	parser.add_argument("--dir",default= " ", help = "directory to save files, such as data/ ")
+	parser.add_argument("--dir",default= "data/", help = "directory to save files, such as data/ ")
 	parser.add_argument("-n","--num_nodes",default= 300, type = int, help = "number of nodes")
 	parser.add_argument("-m","--num_edges",default = 2500, type = int, help = "number of edges")
 	parser.add_argument("-k","--num_extra_edges",default = 300, type = int, help = "# extra edges added to the DAG")

@@ -28,6 +28,9 @@ def remove_cycle_edges_by_agony_iterately(sccs,edges_score,edges_to_be_removed):
 
 def scc_based_to_remove_cycle_edges_iterately(g,edges_score):
 	big_sccs = get_big_sccs(g)
+	if len(big_sccs) == 0:
+		print("After removal of self loop edgs: %s" % nx.is_directed_acyclic_graph(g))
+		return []
 	edges_to_be_removed = []
 	remove_cycle_edges_by_agony_iterately(big_sccs,edges_score,edges_to_be_removed)
 	#print(" # edges to be removed: %d" % len(edges_to_be_removed))

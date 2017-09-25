@@ -13,18 +13,21 @@ def evaluation(graph_file,gt_edges_file,method):
 		from remove_cycle_edges_by_hierarchy import breaking_cycles_by_hierarchy_performance
 		breaking_cycles_by_hierarchy_performance(graph_file,gt_edges_file,method)
 	
-def break_cycles(graph_file,extra_edges_file = None):
+def break_cycles(graph_file,extra_edges_file = None,algorithm = "ensembling"):
 	methods = ["dfs","pagerank","mfas","ensembling"]
-	for method in methods:
-		evaluation(graph_file,extra_edges_file,method)
 
-
+	if algorithm == "all":
+		for method in methods:
+			evaluation(graph_file,extra_edges_file,method)
+	else:
+		evaluation(graph_file,extra_edges_file,algorithm)
+	
 if __name__ == "__main__":
 
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-g","--graph_file",default= " ", help = "graph file to break cycles ")
 	parser.add_argument("-t","--gt_edges_file",default= None, help = "ground truth of edges to be removed")
-
+	parser.add_argument("-m","--method",default = "ensembling", help = "method to break cycles")
 	args = parser.parse_args()
 
-	break_cycles(args.graph_file,args.gt_edges_file)
+	break_cycles(args.graph_file,args.gt_edges_file,args.method)

@@ -63,6 +63,9 @@ def remove_cycle_edges_by_mfas(graph_file):
 	scc_nodes,_,_,_ = scc_nodes_edges(g)
 	degree_dict = get_nodes_degree_dict(g,scc_nodes)
 	sccs = get_big_sccs(g)
+	if len(sccs) == 0:
+		print("After removal of self loop edgs: %s" % nx.is_directed_acyclic_graph(g))
+		return self_loops
 	edges_to_be_removed = []
 	import timeit
 	t1 = timeit.default_timer()

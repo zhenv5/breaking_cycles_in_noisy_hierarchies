@@ -53,6 +53,8 @@ def scc_nodes_edges(g):
 	nonscc_edges = set(g.edges()) - scc_edges
 	print num_nodes_biggest_scc
 	print("num of big sccs: %d" % num_big_sccs)
+	if biggest_scc == None:
+		return scc_nodes,scc_nodes,nonscc_nodes,nonscc_edges
 	print("# nodes in biggest scc: %d, # edges in biggest scc: %d" % (biggest_scc.number_of_nodes(),biggest_scc.number_of_edges()))
 	print("# nodes,edges in scc: (%d,%d), # nodes, edges in non-scc: (%d,%d) " % (len(scc_nodes),len(scc_edges),len(nonscc_nodes),len(nonscc_edges)))
 	num_of_nodes = g.number_of_nodes()

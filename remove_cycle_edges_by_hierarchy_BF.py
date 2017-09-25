@@ -56,6 +56,9 @@ def scores_of_nodes_in_scc(sccs,players):
 
 def scc_based_to_remove_cycle_edges_iterately(g,nodes_score,is_Forward):
 	big_sccs = get_big_sccs(g)
+	if len(big_sccs) == 0:
+		print("After removal of self loop edgs: %s" % nx.is_directed_acyclic_graph(g))
+		return []
 	scc_nodes_score_dict = scores_of_nodes_in_scc(big_sccs,nodes_score)
 	edges_to_be_removed = []
 	remove_cycle_edges_by_ranking_score_iterately(big_sccs,scc_nodes_score_dict,edges_to_be_removed,is_Forward)
