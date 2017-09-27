@@ -43,7 +43,10 @@ def remove_cycle_edges_by_hierarchy(graph_file,nodes_score_dict,score_name = "so
 def computing_hierarchy(graph_file,players_score_func_name):
 	import os.path
 	if players_score_func_name == "socialagony":
-		agony_file = graph_file[:len(graph_file)-6] + "_socialagony.txt"
+		from helper_funs import dir_tail_name
+		dir_name,tail = dir_tail_name(graph_file)
+		agony_file = os.path.join(dir_name,tail.split(".")[0] + "_socialagony.txt")
+		#agony_file = graph_file[:len(graph_file)-6] + "_socialagony.txt"
 		#from compute_social_agony import compute_social_agony
 		#players = compute_social_agony(graph_file,agony_path = "agony/agony ")		
 		if False:

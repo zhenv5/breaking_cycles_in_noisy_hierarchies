@@ -1,5 +1,5 @@
 from datetime import datetime
-
+import os.path 
 def compute_social_agony_script(graph_file,output,agony_path = "agony/agony "):
 	command = agony_path + graph_file + " " + output
 	from helper_funs import run_command
@@ -10,8 +10,12 @@ def compute_social_agony_script(graph_file,output,agony_path = "agony/agony "):
 	time_used = end - start
 	print("time used in computing social agony: %0.4f s" % (time_used.seconds))
 	print("====compute agony done=====")
+
 def compute_social_agony(graph_file,agony_path = "agony/agony "):
-	output = graph_file[:len(graph_file)-6] + "_socialagony.txt"
+	from helper_funs import dir_tail_name
+	dir_name,tail = dir_tail_name(graph_file)
+	output = os.path.join(dir_name,tail.split(".")[0] + "_socialagony.txt")
+	
 	compute_social_agony_script(graph_file,output,agony_path = agony_path)
 	from file_io import read_dict_from_file
 	agony_score = read_dict_from_file(output)

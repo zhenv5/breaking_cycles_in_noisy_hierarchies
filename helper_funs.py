@@ -2,6 +2,15 @@ import numpy as np
 import subprocess
 import os 
 
+
+def dir_tail_name(file_name):
+	import os.path
+	dir_name = os.path.dirname(file_name)
+	head, tail = os.path.split(file_name)
+	print("dir name: %s, file_name: %s" % (dir_name,tail))
+	return dir_name,tail
+
+
 def run_command(command,is_print = False):
 	print command
 	p = subprocess.Popen(command,shell = True, stdout = subprocess.PIPE)
