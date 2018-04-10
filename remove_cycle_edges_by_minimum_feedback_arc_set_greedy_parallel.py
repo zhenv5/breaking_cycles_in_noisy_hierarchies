@@ -57,8 +57,8 @@ def greedy_local_heuristic(sccs,degree_dict,queue):
 			break
 	queue.put(edges_to_be_removed)
 
-def remove_cycle_edges_by_mfas(graph_file):
-	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = int)
+def remove_cycle_edges_by_mfas(graph_file,nodetype = int):
+	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = nodetype)
 	scc_nodes,_,_,_ = scc_nodes_edges(g)
 	degree_dict = get_nodes_degree_dict(g,scc_nodes)
 	sccs = get_big_sccs(g)

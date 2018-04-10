@@ -1,5 +1,7 @@
 from datetime import datetime
-import os.path 
+import os.path
+from helper_funs import dir_tail_name
+
 def compute_social_agony_script(graph_file,output,agony_path = "agony/agony "):
 	command = agony_path + graph_file + " " + output
 	from helper_funs import run_command
@@ -12,7 +14,7 @@ def compute_social_agony_script(graph_file,output,agony_path = "agony/agony "):
 	print("====compute agony done=====")
 
 def compute_social_agony(graph_file,agony_path = "agony/agony "):
-	from helper_funs import dir_tail_name
+	
 	dir_name,tail = dir_tail_name(graph_file)
 	output = os.path.join(dir_name,tail.split(".")[0] + "_socialagony.txt")
 	

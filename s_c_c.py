@@ -27,8 +27,8 @@ def nodes_in_scc(sccs):
 	scc_nodes = []
 	scc_edges = []
 	for scc in sccs:
-		scc_nodes += list(scc.nodes_iter())
-		scc_edges += list(scc.edges_iter())
+		scc_nodes += list(scc.nodes())
+		scc_edges += list(scc.edges())
 
 	#print("# nodes in big sccs: %d" % len(scc_nodes))
 	#print("# edges in big sccs: %d" % len(scc_edges))
@@ -43,8 +43,8 @@ def scc_nodes_edges(g):
 	for sub in nx.strongly_connected_component_subgraphs(g):
 		number_nodes = sub.number_of_nodes()
 		if number_nodes >= 2:
-			scc_nodes.update(sub.nodes_iter())
-			scc_edges.update(sub.edges_iter())
+			scc_nodes.update(sub.nodes())
+			scc_edges.update(sub.edges())
 			num_big_sccs += 1
 			if num_nodes_biggest_scc < number_nodes:
 				num_nodes_biggest_scc = number_nodes

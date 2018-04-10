@@ -19,14 +19,14 @@ def dfs_visit_recursively(g,node,nodes_color,edges_to_be_removed):
 
 	nodes_color[node] = 2
 
-def dfs_remove_back_edges(graph_file):
+def dfs_remove_back_edges(graph_file,nodetype = int):
 	'''
 	0: white, not visited 
 	1: grey, being visited
 	2: black, already visited
 	'''
 
-	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = int)
+	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = nodetype)
 	nodes_color = {}
 	edges_to_be_removed = []
 	for node in g.nodes_iter():

@@ -21,7 +21,7 @@ def get_agonies(edges,players):
 def remove_cycle_edges_by_agony(graph,players,edges_to_be_removed):
 	
 	pair_agony_dict = {}
-	for pair in graph.edges_iter():
+	for pair in graph.edges():
 		u,v = pair
 		agony = max(players[u]-players[v],0)
 		pair_agony_dict[pair] = agony
@@ -45,7 +45,7 @@ def remove_cycle_edges_by_agony_iterately(sccs,players,edges_to_be_removed):
 		graph = sccs.pop()
 		pair_max_agony = None
 		max_agony = -1
-		for pair in graph.edges_iter():
+		for pair in graph.edges():
 			u,v = pair
 			agony = max(players[u]-players[v],0)
 			if agony >= max_agony:

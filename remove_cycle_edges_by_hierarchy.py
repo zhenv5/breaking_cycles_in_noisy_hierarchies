@@ -16,31 +16,31 @@ def get_edges_voting_scores(set_edges_list):
 	return edges_score
 
 
-def remove_cycle_edges_strategies(graph_file,nodes_score_dict,score_name = "socialagony"):
+def remove_cycle_edges_strategies(graph_file,nodes_score_dict,score_name = "socialagony", nodetype = int):
 
 
-	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = int)
+	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = nodetype)
 	# greedy
 	e1 = scc_based_to_remove_cycle_edges_iterately(g,nodes_score_dict)
-	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = int)
+	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = nodetype)
 	# forward
 	e2 = remove_cycle_edges_BF_iterately(g,nodes_score_dict,is_Forward = True,score_name = score_name)
 	# backward
-	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = int)
+	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = nodetype)
 	e3 = remove_cycle_edges_BF_iterately(g,nodes_score_dict,is_Forward = False,score_name = score_name)
 	return e1,e2,e3
 
-def remove_cycle_edges_by_voting(graph_file,set_edges_list):
+def remove_cycle_edges_by_voting(graph_file,set_edges_list,nodetype = int):
 	edges_score = get_edges_voting_scores(set_edges_list)
-	e = remove_cycle_edges_heuristic(graph_file,edges_score)
+	e = remove_cycle_edges_heuristic(graph_file,edges_score,nodetype = nodetype)
 	return e 
 
-def remove_cycle_edges_by_hierarchy(graph_file,nodes_score_dict,score_name = "socialagony"):
-	e1,e2,e3 = remove_cycle_edges_strategies(graph_file,nodes_score_dict,score_name = score_name)
-	e4 = remove_cycle_edges_by_voting(graph_file,[set(e1),set(e2),set(e3)])
+def remove_cycle_edges_by_hierarchy(graph_file,nodes_score_dict,score_name = "socialagony",nodetype = int):
+	e1,e2,e3 = remove_cycle_edges_strategies(graph_file,nodes_score_dict,score_name = score_name,nodetype = nodetype)
+	e4 = remove_cycle_edges_by_voting(graph_file,[set(e1),set(e2),set(e3)],nodetype = nodetype)
 	return e1,e2,e3,e4
 
-def computing_hierarchy(graph_file,players_score_func_name):
+def computing_hierarchy(graph_file,players_score_func_name, nodetype = int):
 	import os.path
 	if players_score_func_name == "socialagony":
 		from helper_funs import dir_tail_name
@@ -59,7 +59,7 @@ def computing_hierarchy(graph_file,players_score_func_name):
 			players = compute_social_agony(graph_file,agony_path = "agony/agony ")
 			print("write socialagony to file: %s" % agony_file)
 		return players
-	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = int)
+	g = nx.read_edgelist(graph_file,create_using = nx.DiGraph(),nodetype = nodetype)
 	if players_score_func_name == "pagerank":
 		#print("computing pagerank...")
 		players = nx.pagerank(g, alpha = 0.85)
@@ -90,12 +90,12 @@ def computing_hierarchy(graph_file,players_score_func_name):
 		
 		return players
 
-def breaking_cycles_by_hierarchy_performance(graph_file,gt_file,players_score_name):
+def breaking_cycles_by_hierarchy_performance(graph_file,gt_file,players_score_name,nodetype = int):
 	
 	from measures import report_performance
 	if players_score_name != "ensembling":
-		players_score_dict  = computing_hierarchy(graph_file,players_score_name)
-		e1,e2,e3,e4 = remove_cycle_edges_by_hierarchy(graph_file,players_score_dict,players_score_name)
+		players_score_dict  = computing_hierarchy(graph_file,players_score_name,nodetype = nodetype)
+		e1,e2,e3,e4 = remove_cycle_edges_by_hierarchy(graph_file,players_score_dict,players_score_name,nodetype = nodetype)
 		
 		if players_score_name == "pagerank":
 			report_performance(gt_file,e1,"PR")
@@ -111,8 +111,8 @@ def breaking_cycles_by_hierarchy_performance(graph_file,gt_file,players_score_na
 		report_performance(gt_file,e3, note+"B")
 		report_performance(gt_file,e4, note+"Voting")
 	else:
-		players_score_dict  = computing_hierarchy(graph_file,"socialagony")
-		e1,e2,e3,e4 = remove_cycle_edges_by_hierarchy(graph_file,players_score_dict,"socialagony")
+		players_score_dict  = computing_hierarchy(graph_file,"socialagony",nodetype = nodetype)
+		e1,e2,e3,e4 = remove_cycle_edges_by_hierarchy(graph_file,players_score_dict,"socialagony",nodetype = nodetype)
 		report_performance(gt_file,e1,  "SA_G")
 		write_pairs_to_file(e1,graph_file[:len(graph_file)-6] + "_removed_by_SA-G.edges")
 		report_performance(gt_file,e2,  "SA_F")
@@ -122,8 +122,8 @@ def breaking_cycles_by_hierarchy_performance(graph_file,gt_file,players_score_na
 		report_performance(gt_file,e4,  "SA_Voting")
 		write_pairs_to_file(e4,graph_file[:len(graph_file)-6] + "_removed_by_SA-Voting.edges")
 
-		players_score_dict  = computing_hierarchy(graph_file,"trueskill")
-		e5,e6,e7,e8 = remove_cycle_edges_by_hierarchy(graph_file,players_score_dict,"trueskill")
+		players_score_dict  = computing_hierarchy(graph_file,"trueskill",nodetype = nodetype)
+		e5,e6,e7,e8 = remove_cycle_edges_by_hierarchy(graph_file,players_score_dict,"trueskill",nodetype = nodetype)
 		report_performance(gt_file,e5,  "TS_G")
 		write_pairs_to_file(e5,graph_file[:len(graph_file)-6] + "_removed_by_TS-G.edges")
 		report_performance(gt_file,e6,  "TS_F")
@@ -133,7 +133,7 @@ def breaking_cycles_by_hierarchy_performance(graph_file,gt_file,players_score_na
 		report_performance(gt_file,e8,  "TS_Voting")
 		write_pairs_to_file(e7,graph_file[:len(graph_file)-6] + "_removed_by_TS-Voting.edges")
 
-		e9 = remove_cycle_edges_by_voting(graph_file,[set(e1),set(e2),set(e3),set(e5),set(e6),set(e7)])
+		e9 = remove_cycle_edges_by_voting(graph_file,[set(e1),set(e2),set(e3),set(e5),set(e6),set(e7)],nodetype = nodetype)
 		report_performance(gt_file,e9,"H_Voting")
 		write_pairs_to_file(e9,graph_file[:len(graph_file)-6] + "_removed_by_H-Voting.edges")
 
