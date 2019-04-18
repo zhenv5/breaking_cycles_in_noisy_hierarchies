@@ -244,6 +244,14 @@ H_Voting 	0.9369 	0.9500 	0.9434 	507
 
 visualization will be saved as: performance_RG(1.5K,15K).pdf
 
+#### Licence and Acknowledgement
+
+BSD Licence.
+
+
+This work is supported by the National Science Foundation of United States under grant CCF-1645599 and IIS-1550302. All content represents the opinion of the authors, which is not necessarily shared or endorsed by their respective employers and/or sponsors.
+
+
 
 #### Cite
 
