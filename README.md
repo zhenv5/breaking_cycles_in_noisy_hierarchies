@@ -11,6 +11,9 @@
 * If you use this code, please consider to cite this paper: [BibTex Download](http://web.cse.ohio-state.edu/~sun.1306/Published_Works/Bib_WebSci_17_Breaking_Cycles_in_Noisy_Hierarchies.bib)
 * [Author Homepage](http://web.cse.ohio-state.edu/~sun.1306)
 
+
+**It's worth mentioning that this code has been used in "Project Ruprecht", developed by Wikimedia Foundation. The project aims to measure the tangledness of PHP code and provides clean codebase. Thanks for Daniel Kinzler (Principal Software Engineer, Wikimedia Foundation) for letting us know that our work can not only fix messy ontologies but also works well for cleaning up messy codebase. updated: 2019.05.10.**
+
 #### 0. Requirements
 
 * Python 2.7
