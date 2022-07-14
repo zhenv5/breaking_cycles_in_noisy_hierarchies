@@ -10,7 +10,7 @@ def read_from_pickle(pickle_file):
 		return {}
 
 def write_dict_to_file(data_dict,output_file):
-	tuple_list = [(k,v) for k,v in data_dict.iteritems()]
+	tuple_list = [(k,v) for k,v in data_dict.items()]
 	write_pairs_to_file(tuple_list,output_file)
 
 def write_pairs_to_file(edges_list,edges_list_file):
