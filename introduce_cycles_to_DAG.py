@@ -27,7 +27,7 @@ def add_cycle_edges_by_path(g,number_of_edges,path_length = 5):
 def add_extra_edges(g,number_of_edges):
 	number = 0
 	num_nodes = g.number_of_nodes()
-	nodes = g.nodes()
+	nodes = list(g.nodes())
 	extra_edges = set()
 	while len(extra_edges) < number_of_edges:
 		u,v = np.random.randint(0,num_nodes,2)
