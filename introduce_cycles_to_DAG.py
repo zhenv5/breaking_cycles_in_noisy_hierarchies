@@ -5,7 +5,7 @@ import numpy as np
 def add_cycle_edges_by_path(g,number_of_edges,path_length = 5):
 	number = 0
 	num_nodes = g.number_of_nodes()
-	nodes = g.nodes()
+	nodes = list(g.nodes())
 	extra_edges = []
 	while number < number_of_edges:
 		u,v = np.random.randint(0,num_nodes,2)
@@ -82,7 +82,7 @@ def introduce_cycles_2_DAG(graph_file,num_extra_edges,path_length):
 	from file_io import write_pairs_to_file
 
 	write_pairs_to_file(extra_edges,extra_edges_file)
-	write_pairs_to_file(extra_edges + g.edges(),graph_with_extra_edges_file)	
+	write_pairs_to_file(extra_edges + list(g.edges()),graph_with_extra_edges_file)	
 
 	return (extra_edges_file,graph_with_extra_edges_file)
 if __name__ == "__main__":

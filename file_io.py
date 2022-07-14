@@ -79,7 +79,7 @@ def read_dict_from_file(file_name,key_type = int, value_type = int):
 				v=value_type(v)
 				d[k] = v
 			except Exception as e:
-				print e 
+				print(e) 
 	return d
 
 
