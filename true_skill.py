@@ -26,14 +26,14 @@ def compute_trueskill(pairs,players):
 
 def get_players_score(players,n_sigma):
 	relative_score = {}
-	for k,v in players.iteritems():
+	for k,v in players.items():
 		relative_score[k] = players[k].mu - n_sigma * players[k].sigma
 	return relative_score
 
 def trueskill_ratings(pairs,iter_times = 15,n_sigma = 3,threshold = 0.85):
 	start = datetime.now()
 	players = {}
-	for i in xrange(iter_times):
+	for i in range(iter_times):
 		#print("========= Trueskill iteration times: %d =========" % (i + 1))
 		players = compute_trueskill(pairs,players)
 		relative_scores = get_players_score(players,n_sigma = n_sigma)

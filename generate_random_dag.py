@@ -45,7 +45,7 @@ def gnm_random_graph(n, m, seed=None, directed=True):
 	if m>=max_edges:
 		return nx.complete_graph(n,create_using=G)
 
-	nlist=G.nodes()
+	nlist=list(G.nodes()) 
 	edge_count=0
 	while edge_count < m:
 		# generate random edge,u,v

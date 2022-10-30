@@ -40,7 +40,7 @@ def F1(gt,predicted):
 		#print("Accu: %0.4f, Recall: %0.4f, f1 score: %0.4f, F1 score: %0.4f" % (accu,recall,f1_score,F1_score))
 		return accu,recall,F1_score
 	except Exception as e:
-		print e
+		print(e)
 		return 0,0,0
 
 def evaluation(gt_file,predicted_file):

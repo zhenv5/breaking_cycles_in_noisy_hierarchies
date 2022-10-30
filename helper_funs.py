@@ -12,11 +12,11 @@ def dir_tail_name(file_name):
 
 
 def run_command(command,is_print = False):
-	print command
+	print(command)
 	p = subprocess.Popen(command,shell = True, stdout = subprocess.PIPE)
 	o = p.communicate() 
 	if is_print:
-		print o[0]
+		print(o[0])
 
 
 def normalize_dict(d,method = "min_max"):
@@ -39,7 +39,7 @@ def pick_from_dict(d, order = "max"):
 	max_k, max_v=  0, -10000
 	
 	max_items = []
-	for k,v in d.iteritems():
+	for k,v in d.items():
 		if v > max_v:
 			max_v = v
 			max_items = [(k,max_v)] 

@@ -28,6 +28,18 @@ and for the rest of the LDFLAGS use
  
 **You should also load the mkl module in batch scripts before you run the code.**
 
+note:
+
+Before you build, run 'module load mkl'. 
+
+##### Install Packages (OSX)
+
+The mac already have most the library you need, you simply install the gsl libray by
+
+brew install gsl
+
+The you can compile the source code as following. You don't have to modify the CFLAGS or LDFLAGS and simply ignore the warning of directory not found. It works fine. 
+
 #### Compile
 
 ```

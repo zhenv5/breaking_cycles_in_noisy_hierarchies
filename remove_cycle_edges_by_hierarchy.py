@@ -12,7 +12,7 @@ def get_edges_voting_scores(set_edges_list):
 		total_edges = total_edges | edges
 	edges_score = {}
 	for e in total_edges:
-		edges_score[e] = len(filter(lambda x: e in x, set_edges_list))
+		edges_score[e] = len(list(filter(lambda x: e in x, set_edges_list)))
 	return edges_score
 
 
